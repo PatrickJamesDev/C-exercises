@@ -1,73 +1,117 @@
-/* In this task, you are required to print a part of ASCII character map
- * (https://en.wikipedia.org/wiki/ASCII) as shown below.
- *   28 0x1c ?    29 0x1d ?       30 0x1e ?       31 0x1f ?
- *   32 0x20      33 0x21 !       34 0x22 "       35 0x23 #
- *   36 0x24 $    37 0x25 %       38 0x26 &
- * Each entry of the table is formatted as below
- *   <integer value> <space> <hexadecimal value> <space> <ASCII character>
- * and <space> is the ' ' character.
- *
- *  1. Implement function void ascii_chart(char min, char max). It should iterate
- *     through numbers starting from min and ending at (and including) max. The
- *     function should print the example output above when it is called
- *     ascii_chart(28,38);.
- *  2. <integer value> part of a table entry should be 3 characters long. If the
- *     number has less than 3 digits (when it is less than 100), the output should
- *     be right aligned.
- *  3. <hexadecimal value> part of a table entry should have 4 characters width
- *     corresponding to the hexadecimal representation of the number. The hexadecimal
- *     representation should be prefixed with 0x and must have 2 character width
- *     filled with 0. For example, number 1 is shown as 0x01.
- *  4. <ASCII character> part of a table entry is the corresponding ASCII encoding
- *     of the number. This part has one character width.
- *     The ASCII encoding defines printable characters to specific integers.
- *     You are required to check whether the number is printable. If the number
- *     is not printable, you should print a ? character.
- *  5. Each row is composed of 4 columns.
- *      - The columns are separated with the tab character '\t'.
- *      - Each row ends with new line character '\n'.
+/* In this task, you will learn how to use conditional statements and formatted
+ * input and output using scanf and printf. You are required to implement
+ * simple_math function that fulfills the following requirements.
+ *  1. The function is declared in source.h as
+ *      void simple_math(void);
+ *  2. Implement the function definition in source.c.
+ *  3. The function should expect the user input in the form
+ *      <number><space><operator><space><number>
+ *      where
+ *      <number>
+ *        is a float type floating point number.
+ *      <operator>
+ *        is one of '+', '-', '*' or '/' characters corresponding to the basic
+ *        mathematical operators.
+ *      <space>
+ *        is the space character ' '.
+ *  4. If the user entry is not in the expected format, the function should print
+ *      ERR
+ *  5. If the user enters any other operator than the above stated ones, the function
+ *     should print
+ *      ERR
+ *  6. If the user enters the required input, the function performs the stated
+ *     operation on the stated numbers and prints the result with a precision of
+ *     a single decimal.
+ * An example call of the function is shown below. The input from the user is marked with
+ * an @ sign:
+ *  @  8 - 2
+ *     6.0
+ *  @  5 * 5
+ *     25.0
+ *  @  8.3 / 5.1
+ *     1.6
+ *  @  2.2 / 0
+ *     ERR
+ *  @  -3.456 - 2.31
+ *     -5.8
+ *  @  2.45 : 1.0
+ *     ERR
+ *  @  * 2.0
+ *     ERR
  * Hint
- *  1. The standard C library has various character related functions declared in ctype.h.
- *     See the reference documentation of the file (http://www.cplusplus.com/reference/cctype/).
- *     In particular, check isprint function.
- *  2. The printf function format specification documentation might be very useful.
+ * - Check the scanf function documentation (http://www.cplusplus.com/reference/cstdio/scanf/)
+ * - how does it treat the white-space characters?
+ * - how does it treat the non-white-space characters except format specifier?
+ * - how does it read the input corresponding to a format specifier?
+ * - what is the format specifier for a floating point number?
+ * - what is the format specifier for a character constant?
  */
 
 #include "source.h"
 
-#include <ctype.h>
+#include <math.h>
 #include <stdio.h>
-#include <string.h>
 
-void ascii_chart(char min, char max) {
-  int x, count = 0;
+void simple_math(void)
 
-  for (x = min; x <= max; x++) {
-    count++;
+{	
+	float a;
+	float b;
+	char c;
 
-    // right align the integer value part
-    if (x < 100) {
-      printf("%3d", x);
-    } else {
-      printf("%d", x);
-    }
+	//float y=0;
+	//printf("ERR5");
+	int x=scanf("%f %c %f", &a, &c, &b);
+	
+	// printf("%f",a);
+	// printf("%f",b);
+	// printf("%c",c);
+	// printf("%f",y);
+	//if (a==float && b==float && c=char)
+	//printf("ERR4\n");
+	//printf("%d\n",x);
+	if (x>=1)
+	
+		
+	{
+		//printf("ERR3");
+		if (c=='*')
+		{
+			float y = a * b;
+			printf("%.1f\n",y);
+		}
+			
+		else if (c=='+')
+		{
+			float y = a + b;
+			printf("%.1f\n",y);
+		}
+			
+		else if (c=='-')
+		{
+			float y = a - b;
+			printf("%.1f\n",y);
+		}
+			
+		else if(c=='/')
+		{
+			float y = a / b;
+			printf("%.1f\n",y);
+		}
+			
+		else 
+		{
+			printf("ERR\n");
+		}
+			
+		
 
-    printf(" 0x%02x", x);  // hexadecimal value part
-
-    // ASCII character part
-    if (isprint(x)) {
-      printf(" %c", x);
-    } else {
-      printf(" ?");
-    }
-
-    // separate columns with tab characters and end the row with new line character
-    if (count % 4 == 0) {
-      printf("\n");
-    } else {
-      printf("\t");
-    }
-  }
-}
-
-
+		}
+		
+	
+	else
+	{
+		printf("ERR\n");
+	}
+	}
+		
